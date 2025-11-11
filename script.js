@@ -9,6 +9,10 @@ let isPaused = false;
 let showTrails = true;
 let speedMultiplier = 1.0;
 
+let draggedBody = null;
+let lastMouseX = 0;
+let lastMouseY = 0;
+
 class Body {
     constructor(x, y, vx, vy, mass, color) {
         this.x = x;
@@ -36,6 +40,13 @@ class Body {
     applyForce(fx, fy) {
         this.vx += fx / this.mass;
         this.vy += fy / this.mass;
+    }
+
+    containsPoint(x, y) {
+        const radius = Math.sqrt(this.mass) * 3;
+        const dx = x - this.x;
+        const dy = y - this.y;
+        return dx * dx + dy * dy <= radius * radius;
     }
 
     draw() {
@@ -98,7 +109,7 @@ function calculateForces() {
 }
 
 function update() {
-    if (!isPaused) {
+    if (!isPaused && !draggedBody) {
         const dt = 0.1 * speedMultiplier;
         calculateForces();
         
@@ -142,6 +153,60 @@ document.getElementById('trailsCheckbox').addEventListener('change', (e) => {
 document.getElementById('speedSlider').addEventListener('input', (e) => {
     speedMultiplier = parseFloat(e.target.value);
     document.getElementById('speedValue').textContent = speedMultiplier.toFixed(1) + 'x';
+});
+
+canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    for (let body of bodies) {
+        if (body.containsPoint(mouseX, mouseY)) {
+            draggedBody = body;
+            lastMouseX = mouseX;
+            lastMouseY = mouseY;
+            canvas.style.cursor = 'grabbing';
+            break;
+        }
+    }
+});
+
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    if (draggedBody) {
+        const dx = mouseX - lastMouseX;
+        const dy = mouseY - lastMouseY;
+        
+        draggedBody.x = mouseX;
+        draggedBody.y = mouseY;
+        draggedBody.vx = dx * 2;
+        draggedBody.vy = dy * 2;
+        
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
+    } else {
+        let hovering = false;
+        for (let body of bodies) {
+            if (body.containsPoint(mouseX, mouseY)) {
+                hovering = true;
+                break;
+            }
+        }
+        canvas.style.cursor = hovering ? 'grab' : 'default';
+    }
+});
+
+canvas.addEventListener('mouseup', () => {
+    draggedBody = null;
+    canvas.style.cursor = 'default';
+});
+
+canvas.addEventListener('mouseleave', () => {
+    draggedBody = null;
+    canvas.style.cursor = 'default';
 });
 
 initBodies();
