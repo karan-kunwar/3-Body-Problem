@@ -8,6 +8,7 @@ const G = 0.5;
 let isPaused = false;
 let showTrails = true;
 let speedMultiplier = 1.0;
+let enableBoundary = false;
 
 let draggedBody = null;
 let lastMouseX = 0;
@@ -28,6 +29,26 @@ class Body {
     updatePosition(dt) {
         this.x += this.vx * dt;
         this.y += this.vy * dt;
+        
+        if (enableBoundary) {
+            const radius = 15;
+            
+            if (this.x - radius < 0) {
+                this.x = radius;
+                this.vx = Math.abs(this.vx);
+            } else if (this.x + radius > canvas.width) {
+                this.x = canvas.width - radius;
+                this.vx = -Math.abs(this.vx);
+            }
+            
+            if (this.y - radius < 0) {
+                this.y = radius;
+                this.vy = Math.abs(this.vy);
+            } else if (this.y + radius > canvas.height) {
+                this.y = canvas.height - radius;
+                this.vy = -Math.abs(this.vy);
+            }
+        }
         
         if (showTrails) {
             this.trail.push({ x: this.x, y: this.y });
@@ -152,6 +173,10 @@ document.getElementById('trailsCheckbox').addEventListener('change', (e) => {
     if (!showTrails) {
         bodies.forEach(body => body.trail = []);
     }
+});
+
+document.getElementById('boundaryCheckbox').addEventListener('change', (e) => {
+    enableBoundary = e.target.checked;
 });
 
 document.getElementById('speedSlider').addEventListener('input', (e) => {

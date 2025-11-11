@@ -16,6 +16,9 @@ This project simulates the gravitational interactions between three celestial bo
   - Toggle trails on/off
   - Adjustable simulation speed (0.1x - 3.0x)
 - **Color-coded Bodies**: Each body has a distinct color (red, cyan, yellow)
+- **Mouse Drag Control**: Click and drag any body to control its motion
+- **Mass Control**: Adjust the mass of each body (0.1-100 kg) with real-time updates
+- **Elastic Boundaries**: Objects bounce off canvas edges with perfect elastic collisions
 
 ## Files
 
@@ -40,3 +43,15 @@ Simply open `index.html` in a web browser.
 - Added cursor feedback (grab/grabbing)
 - Objects retain velocity based on drag motion when released
 - Physics continues normally after releasing dragged object
+
+### Commit 3: Add mass control inputs
+- Added three color-coded mass input fields (Red, Cyan, Yellow)
+- Mass can be adjusted in real-time (0.1-100 kg)
+- Object size remains constant regardless of mass
+- Mass only affects gravitational forces
+
+### Commit 4: Add elastic boundary collisions
+- Implemented boundary collision detection
+- Objects bounce off canvas edges with elastic collisions
+- Prevents objects from leaving the simulation area
+- Velocity reverses on boundary contact

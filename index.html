@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Body Problem Simulation</title>
+    <title>Three Body System Simulation</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Three Body Problem Simulation</h1>
+        <h1>Three Body System Simulation</h1>
         <canvas id="canvas"></canvas>
         <div class="controls">
             <button id="resetBtn">Reset</button>
             <button id="pauseBtn">Pause</button>
             <label>
                 <input type="checkbox" id="trailsCheckbox" checked> Show Trails
+            </label>
+            <label>
+                <input type="checkbox" id="boundaryCheckbox"> Enable Boundary
             </label>
             <label>
                 Speed: <input type="range" id="speedSlider" min="0.1" max="3" step="0.1" value="1">
