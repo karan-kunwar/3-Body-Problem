@@ -21,6 +21,12 @@ An interactive, real-time visualization of the famous three-body problem in phys
 
 ## 🚀 Getting Started
 
+### 🌐 Try it Online
+
+**Live Demo**: [https://karan-kunwar.github.io/3-Body-Problem/](https://karan-kunwar.github.io/3-Body-Problem/)
+
+No installation needed - just click the link and start experimenting!
+
 ### Prerequisites
 
 All you need is a modern web browser! No dependencies or installations required.
