@@ -34,3 +34,9 @@ Simply open `index.html` in a web browser.
 - Implemented CSS styling with gradient background
 - Developed physics simulation with gravitational calculations
 - Added interactive controls (reset, pause, trails, speed)
+
+### Commit 2: Add mouse drag control feature
+- Implemented click-and-drag functionality for objects
+- Added cursor feedback (grab/grabbing)
+- Objects retain velocity based on drag motion when released
+- Physics continues normally after releasing dragged object

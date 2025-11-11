@@ -87,3 +87,42 @@ input[type="range"] {
     min-width: 40px;
     display: inline-block;
 }
+
+.mass-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.mass-input {
+    display: flex;
+    align-items: center;
+}
+
+.mass-input label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.color-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.mass-input input[type="number"] {
+    width: 80px;
+    padding: 5px 8px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 14px;
+}

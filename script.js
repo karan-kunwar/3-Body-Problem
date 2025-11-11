@@ -43,7 +43,7 @@ class Body {
     }
 
     containsPoint(x, y) {
-        const radius = Math.sqrt(this.mass) * 3;
+        const radius = 15;
         const dx = x - this.x;
         const dy = y - this.y;
         return dx * dx + dy * dy <= radius * radius;
@@ -65,7 +65,7 @@ class Body {
 
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, Math.sqrt(this.mass) * 3, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 15, 0, Math.PI * 2);
         ctx.fill();
         
         ctx.shadowBlur = 20;
@@ -81,10 +81,14 @@ function initBodies() {
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
     
+    const mass1 = parseFloat(document.getElementById('mass1').value);
+    const mass2 = parseFloat(document.getElementById('mass2').value);
+    const mass3 = parseFloat(document.getElementById('mass3').value);
+    
     bodies = [
-        new Body(centerX - 100, centerY, 0, -1.5, 30, '#ff6b6b'),
-        new Body(centerX + 100, centerY, 0, 1.5, 30, '#4ecdc4'),
-        new Body(centerX, centerY - 100, 1.5, 0, 30, '#ffe66d')
+        new Body(centerX - 100, centerY, 0, -1.5, mass1, '#ff6b6b'),
+        new Body(centerX + 100, centerY, 0, 1.5, mass2, '#4ecdc4'),
+        new Body(centerX, centerY - 100, 1.5, 0, mass3, '#ffe66d')
     ];
 }
 
@@ -207,6 +211,18 @@ canvas.addEventListener('mouseup', () => {
 canvas.addEventListener('mouseleave', () => {
     draggedBody = null;
     canvas.style.cursor = 'default';
+});
+
+document.getElementById('mass1').addEventListener('change', () => {
+    if (bodies[0]) bodies[0].mass = parseFloat(document.getElementById('mass1').value);
+});
+
+document.getElementById('mass2').addEventListener('change', () => {
+    if (bodies[1]) bodies[1].mass = parseFloat(document.getElementById('mass2').value);
+});
+
+document.getElementById('mass3').addEventListener('change', () => {
+    if (bodies[2]) bodies[2].mass = parseFloat(document.getElementById('mass3').value);
 });
 
 initBodies();
