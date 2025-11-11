@@ -2,7 +2,7 @@
 
 An interactive, real-time visualization of the famous three-body problem in physics, demonstrating the chaotic and unpredictable nature of gravitational interactions between three celestial bodies.
 
-![Three Body Simulation Demo](3body.mov)
+![Three Body Simulation Demo](3body.gif)
 
 ## ✨ Features
 
